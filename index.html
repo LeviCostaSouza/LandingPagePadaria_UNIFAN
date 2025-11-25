@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Padaria Pão & Prosa</title>
+    <style>
+        /* Reset e Variáveis */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cor-principal: #8B4513;
+            --cor-secundaria: #D2691E;
+            --cor-clara: #F5E6D3;
+            --cor-dourada: #DAA520;
+            --cor-texto: #3E2723;
+            --cor-texto-claro: #6D4C41;
+            --branco: #FFFFFF;
+            --sombra: rgba(0, 0, 0, 0.1);
+            --font-principal: 'Playfair Display', serif;
+            --font-texto: 'Lato', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-texto);
+            scroll-behavior: smooth;
+            background-color: #fff8f0;
+            color: var(--cor-texto);
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--cor-secundaria);
+            color: var(--branco);
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-family: var(--font-principal);
+        }
+
+        header nav a {
+            margin-left: 20px;
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            color: var(--cor-dourada);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 85vh;
+            background: linear-gradient(180deg, var(--cor-principal) 0%, #9a4712 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            color: var(--branco);
+            text-align: left;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-family: var(--font-principal);
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+
+        .hero-content a {
+            background: var(--cor-dourada);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #5a3708;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: inline-block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-content a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .hero-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border: 8px solid rgba(255,255,255,0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Container e Seções */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .container h2 {
+            font-size: 2rem;
+            font-family: var(--font-principal);
+            color: var(--cor-principal);
+            margin-bottom: 20px;
+        }
+
+        .container p {
+            line-height: 1.8;
+        }
+
+        /* Produtos */
+        .produtos-section {
+            background: linear-gradient(135deg, var(--cor-secundaria) 0%, #e89b70 100%);
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .produtos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .produtos-titulo {
+            text-align: center;
+            font-size: 2.5rem;
+            font-family: var(--font-principal);
+            color: var(--branco);
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--branco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+
+        .card-imagem {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-conteudo {
+            padding: 20px;
+        }
+
+        .card h3 {
+            color: var(--cor-principal);
+            margin: 0 0 10px 0;
+            font-family: var(--font-principal);
+            font-size: 1.4rem;
+            text-transform: lowercase;
+        }
+
+        .card p {
+            color: var(--cor-texto-claro);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* Localização */
+        .localizacao-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .mapa {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-local {
+            background: var(--branco);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .info-local h3 {
+            color: var(--cor-principal);
+            font-family: var(--font-principal);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .info-item .icone {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .info-item strong {
+            display: block;
+            color: var(--cor-principal);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .info-item p {
+            color: var(--cor-texto-claro);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Contato */
+        .contato-section {
+            background: var(--cor-clara);
+            padding: 60px 20px;
+            margin-top: 40px;
+        }
+
+        .contato-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--cor-secundaria) 0%, var(--cor-principal) 100%);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contato-info {
+            color: var(--branco);
+        }
+
+        .contato-info h2 {
+            font-size: 2.5rem;
+            font-family: var(--font-principal);
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--branco);
+        }
+
+        .contato-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--branco);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .whatsapp-link:hover {
+            opacity: 0.8;
+        }
+
+        .contato-form {
+            background: var(--branco);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: var(--cor-principal);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: Arial, sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--cor-dourada);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .btn-enviar-moderno {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #f4d03f 0%, var(--cor-dourada) 100%);
+            border: none;
+            border-radius: 10px;
+            color: #5a3708;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-enviar-moderno:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(218, 165, 32, 0.4);
+        }
+
+        /* Animação de Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--cor-secundaria);
+            color: var(--branco);
+            padding: 20px;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Botão Voltar ao Topo */
+        #topBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--cor-secundaria);
+            color: var(--branco);
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            font-size: 18px;
+            box-shadow: 0 4px 10px var(--sombra);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        #topBtn:hover {
+            background-color: var(--cor-principal);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            header nav a {
+                margin-left: 10px;
+                margin-right: 10px;
+                font-size: 0.9rem;
+            }
+
+            header nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px 15px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero-image img {
+                max-width: 300px;
+            }
+
+            .produtos {
+                grid-template-columns: 1fr;
+            }
+
+            .localizacao-content {
+                grid-template-columns: 1fr;
+            }
+
+            .mapa {
+                height: 300px;
+            }
+
+            .contato-wrapper {
+                grid-template-columns: 1fr;
+                padding: 40px 25px;
+                gap: 30px;
+            }
+
+            .contato-info h2 {
+                font-size: 2.1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Pão & Prosa</h2>
+        <nav>
+            <a href="#hero">Início</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#sobre">Sobre Nós</a>
+            <a href="#localizacao">Localização</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Pães quentinhos e frescos todos os dias!</h1>
+                <p>Aqui no Pão & Prosa, cada pão é feito com carinho e tradição, do jeitinho que você merece.</p>
+                <a href="#produtos">Conheça nossos produtos</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80" alt="Pão Artesanal">
+            </div>
+        </div>
+    </section>
+
+    <div class="container fade-in" id="sobre">
+        <h2>Sobre Nós</h2>
+        <p>Olá! Eu sou o Joaquim Souza Junior, mas todo mundo me chama de Seu Joaquim. Há mais de 30 anos acordo de madrugada pra colocar o pão no forno e abrir as portas dessa padaria que virou minha segunda casa.<br><br>
+        O Pão & Prosa começou pequeno, com uma masseira velha e muita força de vontade. O nome veio naturalmente, porque aqui, além de pão bom, a gente sempre tem tempo pra uma boa conversa. Conheci casamentos que começaram nessas mesas, vi crianças crescerem vindo buscar pão todo dia.<br><br>
+        Hoje meus filhos me ajudam, mas mantenho a mesma receita e o mesmo carinho de sempre. Modernizamos, criamos esse site, mas o coração continua o mesmo: fazer cada cliente se sentir em casa.</p>
+    </div>
+
+    <section class="produtos-section fade-in" id="produtos">
+        <div class="produtos-container">
+            <h2 class="produtos-titulo">Nossos deliciosos produtos</h2>
+            <div class="produtos">
+                <div class="card">
+                    <div class="card-imagem">
+                        <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec" alt="Pão Francês">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>pão francês</h3>
+                        <p>O clássico que sai quentinho do forno às 6h da manhã. Crocante por fora, macio por dentro.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-imagem">
+                        <img src="https://t3.ftcdn.net/jpg/13/97/97/08/360_F_1397970839_wO3yyF81Sg0LweBR6bVxBvOrnTY4K6XU.jpg" alt="Bolo Caseiro">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>bolo caseiro</h3>
+                        <p>Tem de fubá, cenoura, chocolate... Cada dia uma surpresa diferente com gostinho de infância.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-imagem">
+                        <img src="https://img.freepik.com/fotos-gratis/fotografia-vertical-de-uma-pessoa-derramando-cafe-em-um-copo-em-um-fundo-preto_181624-47216.jpg?semt=ais_hybrid&w=740&q=80" alt="Café Coado">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>café coado</h3>
+                        <p>Café fresquinho, coado na hora, do jeitinho tradicional. Você pode tomar aqui mesmo e trocar uma prosa.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-imagem">
+                        <img src="https://tudodelicious.com/wp-content/uploads/2025/09/Sonho-de-Padaria-1024x1024.jpg" alt="Sonho Recheado">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>sonho recheado</h3>
+                        <p>Aquele sonho que derrete na boca! Recheio de doce de leite, chocolate ou goiabada. Vale a pena experimentar.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-imagem">
+                        <img src="https://i.panelinha.com.br/i1/bk-5103-blog-ayu6207-editado.webp" alt="Pão de Forma Integral">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>pão de forma integral</h3>
+                        <p>Pra quem prefere algo mais leve mas sem perder o sabor. Feito com grãos selecionados.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-imagem">
+                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35" alt="Biscoitos Artesanais">
+                    </div>
+                    <div class="card-conteudo">
+                        <h3>biscoitos artesanais</h3>
+                        <p>Crocantes e saborosos, feitos com manteiga de verdade. Aqueles biscoitos que a gente comia na casa da vó.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container fade-in" id="localizacao">
+        <h2>Conheça a nossa Unidade!</h2>
+        <div class="localizacao-content">
+            <div class="mapa">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3899.0701005827264!2d-38.95661702406456!3d-12.243532788008922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x714382c5743f69d%3A0xbebe04aa83f9bbe3!2sAv.%20Maria%20Quit%C3%A9ria%20-%20Feira%20de%20Santana%2C%20BA%2C%2044003-000!5e0!3m2!1spt-BR!2sbr!4v1764026052563!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="info-local">
+                <h3>Pão & Prosa</h3>
+                <div class="info-item">
+                    <span class="icone">📍</span>
+                    <div>
+                        <strong>Endereço</strong>
+                        <p>Av. Maria Quitéria, 2116<br>Centro, Feira de Santana - BA</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <span class="icone">🕐</span>
+                    <div>
+                        <strong>Horário de Funcionamento</strong>
+                        <p>Segunda a Sábado: 06h às 20h<br>Domingo: 06h às 13h</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="contato-section fade-in" id="contato">
+        <div class="contato-wrapper">
+            <div class="contato-info">
+                <h2>Fale com a gente</h2>
+                <p>Não encontrou o que procura ou quer fazer uma encomenda personalizada? Você pode conversar com a gente pelo WhatsApp, ou pode nos deixar uma mensagem.</p>
+                <a href="https://wa.me/5575999999999" class="whatsapp-link" target="_blank">
+                    📱 75 9999-9999
+                </a>
+            </div>
+
+            <div class="contato-form">
+                <form action="https://formsubmit.co/levicostasouza@gmail.com" method="POST">
+                    <!-- Configurações do FormSubmit -->
+                    <input type="hidden" name="_subject" value="Novo contato - Pão & Prosa">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(75) 9999-9999" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="contato@email.com" required />
+                    </div>
+
+                    <div class="form-group form-group-full">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="O que você precisa?" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-enviar-moderno">ENVIAR MENSAGEM</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Padaria Pão & Prosa • Feira de Santana - BA</p>
+        <p>Segunda a Sábado: 6h às 20h | Domingo: 6h às 13h</p>
+        <p>Siga-nos nas redes sociais: @paoeprosa</p>
+    </footer>
+
+    <button id="topBtn">↑</button>
+
+    <script>
+        // Botão Voltar ao Topo
+        const topBtn = document.getElementById('topBtn');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                topBtn.style.display = 'block';
+            } else {
+                topBtn.style.display = 'none';
+            }
+        });
+
+        topBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Validação do Formulário
+        const form = document.querySelector('#contato form');
+        const nome = document.getElementById('nome');
+        const telefone = document.getElementById('telefone');
+        const email = document.getElementById('email');
+        const mensagem = document.getElementById('mensagem');
+
+        form.addEventListener('submit', (e) => {
+            let erros = [];
+
+            // Validação do Nome
+            if (nome.value.trim().length < 3) {
+                erros.push('O nome deve ter pelo menos 3 caracteres.');
+                nome.style.borderColor = 'red';
+            } else {
+                nome.style.borderColor = '#ddd';
+            }
+
+            // Validação do Telefone
+            const telefoneRegex = /^[\d\s\(\)\-]+$/;
+            if (!telefoneRegex.test(telefone.value.trim()) || telefone.value.trim().length < 10) {
+                erros.push('Por favor, insira um telefone válido.');
+                telefone.style.borderColor = 'red';
+            } else {
+                telefone.style.borderColor = '#ddd';
+            }
+
+            // Validação do Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                erros.push('Por favor, insira um e-mail válido.');
+                email.style.borderColor = 'red';
+            } else {
+                email.style.borderColor = '#ddd';
+            }
+
+            // Validação da Mensagem
+            if (mensagem.value.trim().length < 10) {
+                erros.push('A mensagem deve ter pelo menos 10 caracteres.');
+                mensagem.style.borderColor = 'red';
+            } else {
+                mensagem.style.borderColor = '#ddd';
+            }
+            if (erros.length > 0) {
+                e.preventDefault();
+                alert('Por favor, corrija os seguintes erros:\n\n' + erros.join('\n'));
+            }
+        });
+
+        // Animação de Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animação de Scroll Suave para links da navegação
+        document.querySelectorAll('header nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
